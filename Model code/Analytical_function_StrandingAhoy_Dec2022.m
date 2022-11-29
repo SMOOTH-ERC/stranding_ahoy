@@ -8,7 +8,7 @@
 % - The output is then loaded back into the run file, where results are analysed
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function[output] = Analytical_function_EC_15Jan21(T,S, r_log_sigma, SigmaMax, SigmaMin, networkexternality, rho,  theta, speed, initial_L, initial_H, g_xi, theta_xi, g_FF, alpha, betad) %%betad relevant for Stable Distributions                                  
+function[output] = Analytical_function_StrandingAhoy_Dec2022(T,S, r_log_sigma, SigmaMax, SigmaMin, networkexternality, rho,  theta, speed, initial_L, initial_H, g_xi, theta_xi, g_FF, alpha, betad) %%betad relevant for Stable Distributions                                  
 
 %% Preamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

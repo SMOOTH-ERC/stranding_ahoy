@@ -66,7 +66,7 @@ for sens_par_2 = sens_par_range_2
 
         %% Run model
         % Model equations are called as a function file
-        output = Analytical_function_EC_15Jan21(T,S, r_log_sigma, SigmaMax, SigmaMin, networkexternality, rho, theta, speed, initial_L, initial_H, g_xi, theta_xi, g_FF, alpha, betad);
+        output = Analytical_function_StrandingAhoy_Dec2022(T,S, r_log_sigma, SigmaMax, SigmaMin, networkexternality, rho, theta, speed, initial_L, initial_H, g_xi, theta_xi, g_FF, alpha, betad);
         load(output)
        
         %% Store results
