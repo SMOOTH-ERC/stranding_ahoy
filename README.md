@@ -1,4 +1,5 @@
-# stranding_ahoy
+# Stranding ahoy - paper replication kit
+
 This is the repository for the article 'Stranding ahoy? Heterogeneous transition beliefs and capital investment choices', authored by Louison Cahen-Fourot, Emanuele Campiglio, Louis Daumas, Michael Miess and Andrew Yardley. Current version: December 2022.
 
 The 'Model code' folder contains all the required elements to run the code and replicate the paper's results. The code requires Matlab to be run. 
