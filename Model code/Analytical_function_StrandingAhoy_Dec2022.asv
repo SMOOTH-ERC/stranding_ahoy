@@ -292,17 +292,11 @@ end
     sigma_piH(t,t)          = SigmaMin_piH;
     if (SigmaMax>=SigmaMin)
     sigma_u_H(t,t+s)        = (sigma_u_H(t,t+s-1) +  r_log_sigma*sigma_u_H(t,t+s-1)*(1-sigma_u_H(t,t+s-1)/(SigmaMax)));
-    else
-    sigma_u_H(t,t+s)        = 0;  
-    end
-    if (SigmaMax_piL>=SigmaMin_piL)
     sigma_piL(t,t+s)        = (sigma_piL(t,t+s-1) +  r_log_sigma*sigma_piL(t,t+s-1)*(1-sigma_piL(t,t+s-1)/(SigmaMax_piL))); 
-    else
-    sigma_piL(t,t+s)        = 0;
-    end
-    if (SigmaMax_piH>=SigmaMin_piH)
     sigma_piH(t,t+s)        = (sigma_piH(t,t+s-1) +  r_log_sigma*sigma_piH(t,t+s-1)*(1-sigma_piH(t,t+s-1)/(SigmaMax_piH)));
     else
+    sigma_u_H(t,t+s)        = 0;    
+    sigma_piL(t,t+s)        = 0;
     sigma_piH(t,t+s)        = 0;
     end
     sigma2_uH(t,t+s)      = sigma_u_H(t,t+s)^2;
@@ -371,9 +365,9 @@ end
   end
   else
   ell_I(t) = (cdf('Normal',0,mu_phi(t),sigma_r_H(t)) ...
-      - (mu_phi(t) > sum(lower_bound_pi_h(t,t+1:t+S)))*(mu_phi(t) < sum(upper_bound_pi_h(t,t+1:t+S)))*cdf('Normal',0,sum(lower_bound_pi_h(t,t+1:t+S)),sigma_r_H(t))  ...
-      -  (mu_phi(t) > sum(upper_bound_pi_h(t,t+1:t+S)))*cdf('Normal',0,sum(upper_bound_pi_h(t,t+1:t+S)),sigma_r_H(t)))/(cdf('Normal',0,sum(upper_bound_pi_h(t,t+1:t+S)),sigma_r_H(t)) ...
-      - cdf('Normal',0,sum(lower_bound_pi_h(t,t+1:t+S)),sigma_r_H(t)));
+      - (phi(t) > lower_bound_r(t))*(phi(t) < upper_bound_r(t))*cdf('Normal',0,lower_bound_r(t),sigma_r_H(t))  ...
+      -  (phi(t) > upper_bound_r(t))*cdf('Normal',0,upper_bound_r(t),sigma_r_H(t)))/(cdf('Normal',0,upper_bound_r(t),sigma_r_H(t)) ...
+      - cdf('Normal',0,lower_bound_r(t),sigma_r_H(t)));
   end
 %% TOTAL DESIRED INVESTMENT - Neutralised since we do not use chronological time
 %   xi_e(t)     = u_L(t)*xi_L(t)*ell_K(t)+ mu_u_H(t,t+1)*xi_H(t)*(1-ell_K(t)) ; 
