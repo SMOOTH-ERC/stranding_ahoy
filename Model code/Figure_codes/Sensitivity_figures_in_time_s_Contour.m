@@ -37,16 +37,19 @@ else
             z_axis(isnan(z_axis)) = 0;
         end
     end
-        legend_name =var_sens_s;
+        legend_name =sens_var_name;
         [C,h] = contour(x_axis,y_axis,z_axis, "ShowText","off", LineWidth=3);
         %clabel(C,h,'FontSize',15);
-        contourLegend(h);
+        lgd = contourLegend(h);
+        set(lgd, "Position", [0.909819095134738,0.610700445727334,0.08723680973053,0.313837086955511])
+        fontsize(lgd, 14, 'points')
+        title(lgd, sens_var_name, "Interpreter","latex", FontSize=13);  
         ax.Fontsize = 50;
-        xlabel(sens_par_name_1,'Fontsize',45, 'interpreter', 'latex', 'Rotation',0);
-        ylabel(sens_par_name_2,'Fontsize',45, 'interpreter', 'latex', 'Rotation',90);
-        zlabel(sens_var_name,'Fontsize',45, 'interpreter', 'latex');
+        xlabel(sens_par_name_1,'Fontsize',30, 'interpreter', 'latex', 'Rotation',0);
+        ylabel(sens_par_name_2,'Fontsize',30, 'interpreter', 'latex', 'Rotation',90);
+        zlabel(sens_var_name,'Fontsize',30, 'interpreter', 'latex');
         xl = get(gca, 'XLabel');
-        Fontsize = 45;
+        Fontsize = 30;
         xlFontsize = get(xl, 'Fontsize');
         xAx = get(gca, 'XAxis');
         set(xAx, 'Fontsize', Fontsize);

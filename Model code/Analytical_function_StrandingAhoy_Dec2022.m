@@ -8,7 +8,7 @@
 % - The output is then loaded back into the run file, where results are analysed
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function[output] = Analytical_function_StrandingAhoy_Dec2022(T,S, r_log_sigma, SigmaMax, SigmaMin, networkexternality, rho,  theta, speed, initial_L, initial_H, g_xi, theta_xi, g_FF, alpha, betad, SigmaMin_piL, SigmaMin_piH, SigmaMax_piL, SigmaMax_piH,extended_uncertainty) %%betad relevant for Stable Distributions                                  
+function[output] = Analytical_function_StrandingAhoy_Dec2022(T,S, r_log_sigma, SigmaMax, SigmaMin, networkexternality, rho,  theta, speed, initial_L, initial_H, g_xi, theta_xi, g_FF, alpha, betad, SigmaMin_piL, SigmaMin_piH, SigmaMax_piL, SigmaMax_piH,extended_uncertainty, ell_E_start) %%betad relevant for Stable Distributions                                  
 
 %% Preamble
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -162,7 +162,7 @@ K_d(1)        = K_L(1)+K_H(1);         % For simplicity, assume for first modell
 
 % Electricity Demand
 e_d(1)        = 3243;                  % Initial energy demand (=3000 TWh) 
-ell_E(1)      = 0.22;
+ell_E(1)      = ell_E_start;
 xi_H(:)       = ((1-ell_E(1))*e_d(1) )/(u_H(1)*K_H(1));%6.132;         % Productivity of high-carbon capital
 xi_L(:)       = (ell_E(1)*e_d(1) )/(u_L(1)*K_L(1));%2.628;             % Productivity of low-carbon capital
 

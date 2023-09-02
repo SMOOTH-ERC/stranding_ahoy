@@ -15,9 +15,9 @@ close all
 % Specify up to two parameters for sensitivity analysis  
 % Insert the parameter names as strings 
 % (NB: the chosen parameters need to be redefined in the 'Setting parameters' section)
-sens_par_name_1 = "Long-run belief heterogeneity ($\bar{\sigma}_{u_{H}}$)";
+sens_par_name_1 = "Long-run belief heterogeneity ($\bar{\sigma}_{\pi_{H}}$)";
 sens_par_name_2 = "\begin{tabular}{c} Short-run belief \\ heterogeneity ($\sigma_{u_{H},0}$)\end{tabular}" ;
-sens_var_name   = "\begin{tabular}{c} Current share of low-carbon \\ investment $(\ell_{I})$\end{tabular}";
+sens_var_name   = "\begin{tabular}{c} Share of \\ low-carbon \\ investment \\ $(\ell_{I})$\end{tabular}";
 % To copy when needed "Length of the planning horizon $S$", "Intrinsic growth rate$b_{\ell}$", "$Short-run belief heterogeneity \sigma_{0}$", "$Long-rin belief heterogeneity \bar{\sigma}$", "$Corporate discount rate \rho$", "$Carrying capacity \bar{\ell}$"
 % Define the range of the sensitivity analysis 
 sens_par_range_1 = 0.5:0.05:2;
@@ -45,14 +45,14 @@ for sens_par_2 = sens_par_range_2
         S                  = 20                                   ; % Length of planning horizon        (default=20)
         speed              = ambitious*0.25 + (1-ambitious)*0.15   ; % Expected speed of logistic transition. To replace by sens_par_1 or sens_par_2 to reproduce Fig.5
         r_log_sigma        = 0.28                                  ; % Intrinsic growth rate of sigma_u_H - Fixed here for simplicity
-        SigmaMin           = sens_par_2                            ; % Starting value for sigma_u_H      (default=0.01)
+        SigmaMin           = sens_par_2                           ; % Starting value for sigma_u_H      (default=0.01)
         SigmaMin_piL       = extended_uncertainty*0.01                                 ;  %Starting value for sigma_pi_L      (default=0 (No belief dispersion))
         SigmaMin_piH       = extended_uncertainty*0.01                                 ;  %Starting value for sigma_pi_H      (default=0 (No belief dispersion))
         SigmaMax           = sens_par_1                           ; % Carrying capacity of sigma_u_H    (default=1)
         SigmaMax_piL       = 0.5                                  ;  %Carrying capacity for sigma_pi_L      (default=1 )
         SigmaMax_piH       = 0.5                                 ;  %Carrying capacity for sigma_pi_H      (default=1 )
         rho                = 0.05                                  ; % Discount Rate (default = 0.05)
-        theta              = 0.9                                   ; % Carrying Capacity of expected low carbon energy prod. share (default=0.85)
+        theta              = 0.85                                   ; % Carrying Capacity of expected low carbon energy prod. share (default=0.85)
         
         %%%Stable distribution Annex
         alpha              = 2                                     ; %Kurtosis parameter for stable distribution (default = 2)
@@ -65,13 +65,14 @@ for sens_par_2 = sens_par_range_2
         g_FF               = 0                                     ; % Expected growth of fossil fuel price (Default = 0)
 
         %Initial values
-        initial_L          = 288            ; % Initial Low carbon capital stock 
-        initial_H          = 659            ; % Initial High carbon capital stock 
+        initial_L          = 288           ; % Initial Low carbon capital stock 
+        initial_H          = 947 - initial_L           ; % Initial High carbon capital stock
+        ell_E_start        = 0.22           ; % Initial low-carbon energy production
         
 
         %% Run model
         % Model equations are called as a function file
-        output = Analytical_function_StrandingAhoy_Dec2022(T,S, r_log_sigma, SigmaMax, SigmaMin, networkexternality, rho, theta, speed, initial_L, initial_H, g_xi, theta_xi, g_FF, alpha, betad, SigmaMin_piL, SigmaMin_piH, SigmaMax_piL, SigmaMax_piH,extended_uncertainty);
+        output = Analytical_function_StrandingAhoy_Dec2022(T,S, r_log_sigma, SigmaMax, SigmaMin, networkexternality, rho, theta, speed, initial_L, initial_H, g_xi, theta_xi, g_FF, alpha, betad, SigmaMin_piL, SigmaMin_piH, SigmaMax_piL, SigmaMax_piH,extended_uncertainty, ell_E_start);
         load(output)
        
         %% Store results
